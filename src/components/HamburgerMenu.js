@@ -1,4 +1,3 @@
-// components/HamburgerMenu.js
 const HamburgerMenu = ({ toggleMenu, menuOpen }) => {
   return (
     <button

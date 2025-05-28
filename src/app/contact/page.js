@@ -4,7 +4,7 @@ const ContactPage = () => {
   return (
     <div className='contact-page text-neutral'>
       {/* Hero */}
-      <section className='hero bg-cover bg-center text-white p-4 sm:p-12 section-margin-top bg-[url("/path-to-bg.jpg")]'>
+      <section className='hero bg-cover bg-center text-white p-4 sm:p-12 section-margin-top'>
         <div className='container mx-auto text-center flex flex-col items-center py-32'>
           <h1 className='sm:text-4xl text-2xl font-semibold mb-4 text-shadow-md'>
             Contact Us
