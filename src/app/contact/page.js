@@ -11,7 +11,7 @@ const ContactPage = () => {
           </h1>
           <p className='text-lg mb-6 text-shadow-md'>
             For inquiries, quotes, or to discuss your project, please reach out
-            to us using the contact information below.
+            to us using the contact information below
           </p>
         </div>
       </section>
