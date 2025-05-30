@@ -22,15 +22,13 @@ jobs:
       - name: Deploy via SSH
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
-            which node
-            node -v
-            which npm
-            npm -v
             cd ${{ secrets.PROJECT_PATH }}
+            echo "🧠 Using correct Node version:"
+            /usr/local/node-20/bin/node -v
             echo "🧠 Latest commit:"
             git log -1
             git pull origin main
-            npm install
-            NODE_ENV=production npm run build
+            /usr/local/node-20/bin/npm install
+            NODE_ENV=production /usr/local/node-20/bin/npm run build
             pm2 restart barsell-construction
           EOF
