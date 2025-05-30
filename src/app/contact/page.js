@@ -7,7 +7,7 @@ const ContactPage = () => {
       <section className='hero bg-cover bg-center text-white p-4 sm:p-12 section-margin-top'>
         <div className='container mx-auto text-center flex flex-col items-center py-32'>
           <h1 className='sm:text-4xl text-2xl font-semibold mb-4 text-shadow-md'>
-            Contact
+            Contact Us
           </h1>
           <p className='text-lg mb-6 text-shadow-md'>
             For inquiries, quotes, or to discuss your project, please reach out
