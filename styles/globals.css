@@ -3,26 +3,36 @@
 @tailwind utilities;
 
 /* Global styles */
+/* 1. Reset and base styles */
+html,
 body {
-  font-family: 'Roboto', sans-serif; /* Default body font */
-  background-color: #f8f8f8; /* Light background for the app */
-  color: #000; /* Default text color */
-  background: fixed no-repeat center center/cover url('/images/bg.jpg');
   margin: 0;
-  height: 100%;
   padding: 0;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  color: #fff; /* Light text for contrast */
+  position: relative;
+  overflow-x: hidden;
 }
 
+/* 2. Background image on html */
+html {
+  background: url('/images/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* 3. Dark overlay to make text/UI readable */
 body::before {
   content: '';
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+  left: 0;
+  background: rgba(0, 0, 0, 0.4); /* Dark overlay, adjust as needed */
   z-index: -1;
-  height: 100%;
+  pointer-events: none;
 }
 
 h1,

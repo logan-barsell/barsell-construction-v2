@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`antialiased bg-neutral text-secondary ${roboto.className} ${alegreyaSC.className}`}
+        className={`antialiased text-secondary ${roboto.className} ${alegreyaSC.className}`}
       >
         {/* Header Nav */}
         <Header />
