@@ -3,39 +3,35 @@
 @tailwind utilities;
 
 /* Global styles */
-/* 1. Reset and base styles */
-html {
-  height: 100%;
-}
-
+/* 1. Base styles */
+html,
 body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  color: #fff; /* Light text for contrast */
+  color: #fff;
+  min-height: 100vh;
   position: relative;
   overflow-x: hidden;
-  min-height: 100vh; /* Allow body to grow with content */
+  background: none;
 }
 
-/* 2. Background image on html */
-html {
-  background: url('/images/bg.jpg') no-repeat center center fixed;
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-/* 3. Dark overlay to make text/UI readable */
-body::before {
-  content: '';
+/* 2. Fixed background image and dark overlay */
+#fixed-bg {
   position: fixed;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
   z-index: -1;
+
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('/images/bg.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: scroll; /* Don't use 'fixed' on mobile */
   pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 h1,

@@ -24,6 +24,7 @@ export default function RootLayout({ children }) {
       <body
         className={`antialiased text-secondary ${roboto.className} ${alegreyaSC.className}`}
       >
+        <div id='fixed-bg' />
         {/* Header Nav */}
         <Header />
         {/* Main Content */}
