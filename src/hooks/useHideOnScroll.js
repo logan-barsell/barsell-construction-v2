@@ -9,8 +9,10 @@ const useHideOnScroll = (threshold = 20) => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const isAtTop = currentScrollY <= 0;
+      const BOTTOM_BUFFER = 30; // pixels from bottom to treat as "bottom"
       const isAtBottom =
-        window.innerHeight + currentScrollY >= document.body.offsetHeight - 1;
+        window.innerHeight + currentScrollY >=
+        document.body.offsetHeight - BOTTOM_BUFFER;
 
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
