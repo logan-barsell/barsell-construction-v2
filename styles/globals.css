@@ -4,15 +4,18 @@
 
 /* Global styles */
 /* 1. Reset and base styles */
-html,
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
   font-family: 'Roboto', sans-serif;
   color: #fff; /* Light text for contrast */
   position: relative;
   overflow-x: hidden;
+  min-height: 100vh; /* Allow body to grow with content */
 }
 
 /* 2. Background image on html */
@@ -30,7 +33,7 @@ body::before {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.4); /* Dark overlay, adjust as needed */
+  background: rgba(0, 0, 0, 0.4);
   z-index: -1;
   pointer-events: none;
 }

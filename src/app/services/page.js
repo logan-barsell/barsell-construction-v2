@@ -44,11 +44,11 @@ const ServicesPage = () => {
                 }`}
               >
                 {/* Image visible only on large screens */}
-                <div className='hidden lg:block mb-6'>
+                <div className=' mb-6'>
                   <img
                     src={service.image}
                     alt={service.name}
-                    className={`max-w-xs w-full h-auto object-cover ${
+                    className={`m-auto lg:m-0 max-w-sm sm:max-w-xs w-full h-auto object-cover ${
                       index % 2 === 0
                         ? `lg:justify-self-start`
                         : `lg:justify-self-end`
@@ -64,7 +64,7 @@ const ServicesPage = () => {
                   {service.description}
                 </p>
                 <AnimatedButton
-                  className={`justify-self-center ${
+                  className={`justify-self-center mx-auto lg:mx-0 ${
                     index % 2 === 0
                       ? `lg:justify-self-start`
                       : `lg:justify-self-end`

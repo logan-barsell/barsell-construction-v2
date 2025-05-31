@@ -14,12 +14,14 @@ const useHideOnScroll = (threshold = 20) => {
       const isAtBottom =
         window.innerHeight + currentScrollY >=
         document.body.offsetHeight - BOTTOM_BUFFER;
-
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
           const delta = currentScrollY - lastScrollY.current;
 
-          if (Math.abs(delta) < 2) return;
+          if (Math.abs(delta) < 2) {
+            ticking.current = false; // ✅ reset on early return
+            return;
+          }
 
           if (isAtTop) {
             setShowNav(true);
@@ -37,6 +39,11 @@ const useHideOnScroll = (threshold = 20) => {
         });
 
         ticking.current = true;
+
+        // Fail-safe fallback
+        setTimeout(() => {
+          ticking.current = false;
+        }, 100);
       }
     };
 
