@@ -30,8 +30,7 @@ body {
   background-size: cover;
   background-attachment: scroll; /* Don't use 'fixed' on mobile */
   pointer-events: none;
-  will-change: transform;
-  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 h1,
