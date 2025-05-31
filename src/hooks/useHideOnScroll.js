@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-const useHideOnScroll = () => {
+const useHideOnScroll = (threshold = 20) => {
   const [showNav, setShowNav] = useState(true);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
@@ -8,24 +8,22 @@ const useHideOnScroll = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const isAtTop = currentScrollY <= 0;
+      const isAtBottom =
+        window.innerHeight + currentScrollY >= document.body.offsetHeight - 1;
 
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
           const delta = currentScrollY - lastScrollY.current;
 
-          // Only update if scroll delta is significant
-          if (Math.abs(delta) > 5) {
-            if (currentScrollY <= 0) {
-              // Always show nav at the very top
-              setShowNav(true);
-            } else if (delta > 0) {
-              // Scrolling down
-              setShowNav(false);
-            } else {
-              // Scrolling up
-              setShowNav(true);
-            }
-
+          if (isAtTop) {
+            setShowNav(true);
+            lastScrollY.current = 0;
+          } else if (isAtBottom) {
+            // Do nothing — don’t show nav on bottom bounce
+            lastScrollY.current = currentScrollY;
+          } else if (Math.abs(delta) > threshold) {
+            setShowNav(delta < 0); // Show nav if scrolling up
             lastScrollY.current = currentScrollY;
           }
 
@@ -37,9 +35,8 @@ const useHideOnScroll = () => {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [threshold]);
 
   return showNav;
 };
