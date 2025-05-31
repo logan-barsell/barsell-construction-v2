@@ -43,16 +43,15 @@ const ServicesPage = () => {
                   index % 2 === 0 ? 'lg:text-left' : 'lg:text-right' // Alternate alignment
                 }`}
               >
-                {/* Image visible only on large screens */}
-                <div className=' mb-6'>
+                <div
+                  className={`mb-6 flex justify-center ${
+                    index % 2 === 0 ? 'lg:justify-start' : 'lg:justify-end'
+                  }`}
+                >
                   <img
                     src={service.image}
                     alt={service.name}
-                    className={`m-auto lg:m-0 max-w-sm sm:max-w-xs w-full h-auto object-cover ${
-                      index % 2 === 0
-                        ? `lg:justify-self-start`
-                        : `lg:justify-self-end`
-                    }`} // Adjust the size and fit of the image
+                    className='max-w-sm sm:max-w-xs w-full h-auto object-cover'
                   />
                 </div>
 
