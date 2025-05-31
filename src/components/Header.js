@@ -57,7 +57,7 @@ const Header = () => {
   return (
     <ClickOutside onClickOutside={handleClickOutside}>
       <header
-        className={`z-40 bg-nav p-2 pt-0 pb-0 xs:p-6 xs:pb-0 xs:pt-0 shadow-md text-white border-solid border-b border-primary  fixed w-full top-0 transition-all duration-300 ease-in-out transform ${
+        className={`will-change-transform z-40 bg-nav p-2 pt-0 pb-0 xs:p-6 xs:pb-0 xs:pt-0 shadow-md text-white border-solid border-b border-primary  fixed w-full top-0 transition-all duration-300 ease-in-out transform ${
           showNav ? 'translate-y-0' : '-translate-y-full'
         }`}
       >

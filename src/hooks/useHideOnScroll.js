@@ -4,12 +4,13 @@ const useHideOnScroll = (threshold = 20) => {
   const [showNav, setShowNav] = useState(true);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
+  const cooldown = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const isAtTop = currentScrollY <= 0;
-      const BOTTOM_BUFFER = 30; // pixels from bottom to treat as "bottom"
+      const BOTTOM_BUFFER = 30;
       const isAtBottom =
         window.innerHeight + currentScrollY >=
         document.body.offsetHeight - BOTTOM_BUFFER;
@@ -18,14 +19,17 @@ const useHideOnScroll = (threshold = 20) => {
         window.requestAnimationFrame(() => {
           const delta = currentScrollY - lastScrollY.current;
 
+          if (Math.abs(delta) < 2) return;
+
           if (isAtTop) {
             setShowNav(true);
             lastScrollY.current = 0;
           } else if (isAtBottom) {
-            // Do nothing — don’t show nav on bottom bounce
+            cooldown.current = true;
+            setTimeout(() => (cooldown.current = false), 400);
             lastScrollY.current = currentScrollY;
-          } else if (Math.abs(delta) > threshold) {
-            setShowNav(delta < 0); // Show nav if scrolling up
+          } else if (!cooldown.current && Math.abs(delta) > threshold) {
+            setShowNav(delta < 0);
             lastScrollY.current = currentScrollY;
           }
 
