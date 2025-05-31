@@ -16,19 +16,26 @@ body {
   background: none;
 }
 
-/* 2. Fixed background image and dark overlay */
+/* 2. Container for the background */
 #fixed-bg {
   position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* 3. Inner background content */
+#fixed-bg::before {
+  content: '';
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   height: 100%;
-  z-index: -1;
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url('/images/bg.jpg') no-repeat center center;
   background-size: cover;
-  background-attachment: scroll; /* Don't use 'fixed' on mobile */
-  pointer-events: none;
 }
 
 h1,
