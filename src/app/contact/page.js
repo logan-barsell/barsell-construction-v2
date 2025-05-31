@@ -54,7 +54,7 @@ const ContactPage = () => {
         />
 
         {/* Map */}
-        <div className='rounded-xl overflow-hidden shadow-md h-[300px] w-full max-w-md'>
+        <div className='overflow-hidden shadow-md h-[300px] w-full max-w-md'>
           <iframe
             title='Map of Alamo CA'
             className='w-full h-full'
@@ -73,7 +73,7 @@ const ContactCard = ({ icon, title, value, href }) => (
     href={href}
     target='_blank'
     rel='noopener noreferrer'
-    className='w-full max-w-md flex items-center gap-4 p-4 rounded-xl shadow-sm transition-all bg-lightWhite hover:bg-nav group'
+    className='w-full max-w-md flex items-center gap-4 p-4 shadow-sm transition-all bg-lightWhite hover:bg-nav group'
   >
     <div className='p-2 bg-primary/10 rounded-full text-primary text-lg'>
       {icon}

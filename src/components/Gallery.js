@@ -17,7 +17,7 @@ const Gallery = ({ gallery }) => {
         <div
           key={index}
           ref={el => registerImageRef(el, index)}
-          className='relative overflow-hidden rounded-lg opacity-0'
+          className='relative overflow-hidden opacity-0'
         >
           <img
             src={image}

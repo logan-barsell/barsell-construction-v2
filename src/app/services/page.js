@@ -63,16 +63,19 @@ const ServicesPage = () => {
                 <p className='text-xl text-light mb-8 mx-auto'>
                   {service.description}
                 </p>
-                <AnimatedButton
-                  className={`justify-self-center mx-auto lg:mx-0 ${
+                <div
+                  className={`flex ${
                     index % 2 === 0
-                      ? `lg:justify-self-start`
-                      : `lg:justify-self-end`
+                      ? 'justify-center lg:justify-start'
+                      : 'justify-center lg:justify-end'
                   }`}
-                  text='Learn More'
-                  color={index % 2 === 0 ? 'black' : 'white'}
-                  onClick={() => router.push('/contact')}
-                />
+                >
+                  <AnimatedButton
+                    text='Learn More'
+                    color={index % 2 === 0 ? 'black' : 'white'}
+                    onClick={() => router.push('/contact')}
+                  />
+                </div>
               </div>
             </div>
           ))}
