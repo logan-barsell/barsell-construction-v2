@@ -5,12 +5,12 @@ const Footer = () => {
     <footer className=' py-8 text-neutral text-shadow-md'>
       <div className='container mx-auto text-center space-y-4'>
         {/* Company Name & Note */}
-        <p className='text-xl font-primary'>Barsell Construction</p>
+        <p className='text-xl font-primary'>Barsell Construction Inc.</p>
         <p className='text-sm'>Proudly serving the Bay Area since 1994.</p>
 
         {/* Copyright */}
         <p className='text-xs'>
-          © {new Date().getFullYear()} Barsell Construction. All rights
+          © {new Date().getFullYear()} Barsell Construction Inc. All rights
           reserved.
         </p>
 

@@ -63,7 +63,9 @@ const Header = () => {
       >
         <nav className='mx-auto flex justify-between items-start xs:items-end'>
           <div className='hidden lg:block lg:w-1/3 lg:flex lg:justify-start'>
-            <h1 className='text-3xl leading-normal '>Barsell Construction</h1>
+            <h1 className='text-2xl leading-normal '>
+              Barsell Construction Inc.
+            </h1>
           </div>
 
           {/* Logo and Company Name */}

@@ -1,5 +1,7 @@
-import { useEffect, useRef } from 'react';
+'use client';
+import { useRef } from 'react';
 import useScrollAnimation from '@/hooks/useScrollAnimation';
+import Image from 'next/image';
 
 const Gallery = ({ gallery }) => {
   const imageRefs = useRef([]);
@@ -10,7 +12,7 @@ const Gallery = ({ gallery }) => {
 
   return (
     <div
-      key={gallery.length + gallery[0]} // Force rerender if tab changes
+      key={gallery.length + gallery[0]}
       className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8'
     >
       {gallery.map((image, index) => (
@@ -19,10 +21,15 @@ const Gallery = ({ gallery }) => {
           ref={el => registerImageRef(el, index)}
           className='relative overflow-hidden opacity-0'
         >
-          <img
-            src={image}
-            alt={`Gallery image ${index + 1}`}
+          <Image
+            src={image.src}
+            alt={image.alt || `Gallery Image ${index + 1}`}
+            width={800}
+            height={600}
             className='object-cover w-full h-full'
+            sizes='(max-width: 640px) 100vw, 50vw'
+            loading='lazy'
+            placeholder='empty'
           />
         </div>
       ))}

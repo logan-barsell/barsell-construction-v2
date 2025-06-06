@@ -1,16 +1,14 @@
 'use client';
 import { useRef } from 'react';
+import Image from 'next/image';
 import AnimatedButton from '@/components/buttons/AnimatedButton';
 import { services } from '@/data/services';
-import useScrollAnimation from '@/hooks/useScrollAnimation'; // Import the scroll animation hook
+import useScrollAnimation from '@/hooks/useScrollAnimation';
 import { useRouter } from 'next/navigation';
 
 const ServicesPage = () => {
   const router = useRouter();
-  // Create a ref array to store all the service elements
   const elementsRef = useRef([]);
-
-  // Using the custom scroll animation hook
   const assignRef = useScrollAnimation(elementsRef, {
     duration: 0.8,
     delay: 0.1,
@@ -32,15 +30,13 @@ const ServicesPage = () => {
             <div
               key={index}
               className={`hero-section px-6 w-full ${
-                index % 2 === 0
-                  ? 'bg-heroWhite' // Keep the bg-nav for the default background
-                  : ' text-white text-shadow-md' // bg-primary for alternate sections
+                index % 2 === 0 ? 'bg-heroWhite' : 'text-white text-shadow-md'
               } py-16`}
-              ref={el => assignRef(el, index)} // Assigning the ref for scroll animation
+              ref={el => assignRef(el, index)}
             >
               <div
                 className={`container mx-auto ${
-                  index % 2 === 0 ? 'lg:text-left' : 'lg:text-right' // Alternate alignment
+                  index % 2 === 0 ? 'lg:text-left' : 'lg:text-right'
                 }`}
               >
                 <div
@@ -48,14 +44,19 @@ const ServicesPage = () => {
                     index % 2 === 0 ? 'lg:justify-start' : 'lg:justify-end'
                   }`}
                 >
-                  <img
-                    src={service.image}
-                    alt={service.name}
-                    className='max-w-sm sm:max-w-xs w-full h-auto object-cover'
-                  />
+                  <div className='relative max-w-sm sm:max-w-xs w-full h-auto aspect-[4/3]'>
+                    <Image
+                      src={service.image}
+                      alt={`${service.name} Service Hero Image`}
+                      fill
+                      sizes='(max-width: 768px) 100vw, 400px'
+                      className='object-cover rounded-md'
+                      loading='lazy'
+                      placeholder='empty'
+                    />
+                  </div>
                 </div>
 
-                {/* Service title and description */}
                 <h3 className='text-2xl sm:text-3xl md:text-5xl font-bold mb-8'>
                   {service.name}
                 </h3>

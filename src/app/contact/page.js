@@ -28,7 +28,7 @@ const ContactPage = () => {
         <ContactCard
           icon={<Mail className='w-6 h-6' />}
           title='Email'
-          value='johnbarsell@yahoo.com'
+          value='john@barsellconstruction.com'
           href='mailto:johnbarsell@yahoo.com'
         />
 
@@ -78,9 +78,11 @@ const ContactCard = ({ icon, title, value, href }) => (
     <div className='p-2 bg-primary/10 rounded-full text-primary text-lg'>
       {icon}
     </div>
-    <div className='text-shadow-md'>
+    <div className='w-full flex flex-col overflow-hidden'>
       <p className='font-semibold'>{title}</p>
-      <p className='text-base group-hover:underline text-shadow-md'>{value}</p>
+      <p className='text-base group-hover:underline text-shadow-md truncate overflow-hidden whitespace-nowrap max-w-[200px] sm:max-w-[300px]'>
+        {value}
+      </p>
     </div>
   </a>
 );
