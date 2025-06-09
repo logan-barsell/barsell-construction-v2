@@ -1,9 +1,18 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { missionStatements } from '@/data/missionStatements';
 import useScrollAnimation from '@/hooks/useScrollAnimation';
 
 const MissionStatements = () => {
-  // Using the custom hook to animate the mission statements
+  const [hasMounted, setHasMounted] = useState(false);
   const assignRef = useScrollAnimation([], { duration: 0.8, delay: 0.1 });
+
+  // Delay animations to avoid blocking LCP
+  useEffect(() => {
+    const timeout = setTimeout(() => setHasMounted(true), 100); // short delay after mount
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <>
@@ -14,8 +23,10 @@ const MissionStatements = () => {
             {missionStatements.map((statement, index) => (
               <p
                 key={index}
-                ref={el => assignRef(el, index)} // Assign ref to each mission statement
-                className='text-lg max-w-xl mx-auto opacity-0 transform translate-y-6' // Initial opacity 0 and y-offset
+                ref={el => hasMounted && assignRef(el, index)}
+                className={`text-lg max-w-xl mx-auto transition-opacity transition-transform duration-700 ease-out ${
+                  hasMounted ? 'opacity-0 translate-y-6' : ''
+                }`}
               >
                 {statement}
               </p>
