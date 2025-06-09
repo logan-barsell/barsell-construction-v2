@@ -7,50 +7,39 @@ on:
 
 jobs:
   deploy:
-    name: Build and Deploy
+    name: Build and Deploy via SSH
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: 📥 Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Cache node modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build project
-        run: NODE_ENV=production npm run build
-
-      - name: Setup SSH
+      - name: ⚙️ Setup SSH Agent
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Rsync production build to server
+      - name: 🧠 Add Server to Known Hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+      - name: 📦 Install Dependencies
+        run: npm install
+
+      - name: 🛠️ Build for Production
+        run: npm run build
+
+      - name: 🚚 Rsync Production Files to Server
         run: |
           rsync -avz --delete \
             .next/ public/ package.json package-lock.json \
             ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.PROJECT_PATH }}
 
-      - name: Restart app on server
+      - name: 🔁 Restart PM2 on Server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
             export PATH="/usr/local/node-20/bin:$PATH"
             cd ${{ secrets.PROJECT_PATH }}
-            echo "🧠 Installing production dependencies"
-            npm ci --omit=dev
-            echo "🚀 Restarting app with PM2"
-            pm2 restart barsell-construction || pm2 start npm --name "barsell-construction" -- start
+            pm2 restart barsell-construction || pm2 start npm --name barsell-construction -- start
           EOF
