@@ -7,29 +7,50 @@ on:
 
 jobs:
   deploy:
-    name: Deploy via SSH
+    name: Build and Deploy
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: NODE_ENV=production npm run build
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Deploy via SSH
+      - name: Rsync production build to server
+        run: |
+          rsync -avz --delete \
+            .next/ public/ package.json package-lock.json \
+            ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.PROJECT_PATH }}
+
+      - name: Restart app on server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
             export PATH="/usr/local/node-20/bin:$PATH"
             cd ${{ secrets.PROJECT_PATH }}
-            echo "🧠 Using correct Node version:"
-            node -v
-            echo "🧠 Latest commit:"
-            git log -1
-            git pull origin main
-            npm install
-            NODE_ENV=production npm run build
-            pm2 restart barsell-construction
+            echo "🧠 Installing production dependencies"
+            npm ci --omit=dev
+            echo "🚀 Restarting app with PM2"
+            pm2 restart barsell-construction || pm2 start npm --name "barsell-construction" -- start
           EOF
