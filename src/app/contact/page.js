@@ -1,4 +1,16 @@
-import { Mail, Phone, Facebook, Linkedin, MapPin } from 'lucide-react';
+'use client';
+
+import {
+  faPhone,
+  faEnvelope,
+  faMapPin,
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  faFacebook,
+  faLinkedin,
+  faHouzz,
+} from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ContactPage = () => {
   return (
@@ -17,37 +29,74 @@ const ContactPage = () => {
       </section>
 
       {/* Stacked Contact Section */}
-      <section className='container mx-auto px-4 sm:px-8 py-16 flex flex-col items-center gap-4'>
+      <section className='container mx-auto px-4 sm:px-8 py-16 flex flex-col items-center  gap-4'>
         <ContactCard
-          icon={<Phone className='w-6 h-6' />}
+          icon={
+            <FontAwesomeIcon
+              icon={faPhone}
+              className='w-6 h-6 bg-primaryFaded p-2 rounded-full'
+            />
+          }
           title='Call or Text'
           value='925-260-4331'
           href='tel:+19252604331'
         />
 
         <ContactCard
-          icon={<Mail className='w-6 h-6' />}
+          icon={
+            <FontAwesomeIcon
+              icon={faEnvelope}
+              className='w-6 h-6 bg-primaryFaded p-2 rounded-full'
+            />
+          }
           title='Email'
           value='john@barsellconstruction.com'
           href='mailto:johnbarsell@yahoo.com'
         />
 
         <ContactCard
-          icon={<Linkedin className='w-6 h-6' />}
+          icon={
+            <FontAwesomeIcon
+              icon={faLinkedin}
+              className='w-6 h-6 bg-primaryFaded p-2 rounded-full'
+            />
+          }
           title='LinkedIn'
           value='john-barsell'
           href='https://www.linkedin.com/in/john-barsell-1601891b/'
         />
 
         <ContactCard
-          icon={<Facebook className='w-6 h-6' />}
+          icon={
+            <FontAwesomeIcon
+              icon={faFacebook}
+              className='w-6 h-6 bg-primaryFaded p-2 rounded-full'
+            />
+          }
           title='Facebook'
           value='Visit Page'
           href='https://www.facebook.com/BarsellConstruction/'
         />
 
         <ContactCard
-          icon={<MapPin className='w-6 h-6' />}
+          icon={
+            <FontAwesomeIcon
+              icon={faHouzz}
+              className='w-6 h-6 bg-primaryFaded p-2 rounded-full'
+            />
+          }
+          title='Houzz'
+          value='Visit Profile'
+          href='https://www.houzz.com/professionals/general-contractors/barsell-construction-inc-pfvwus-pf~1167174073'
+        />
+
+        <ContactCard
+          icon={
+            <FontAwesomeIcon
+              icon={faMapPin}
+              className='w-6 h-6 bg-primaryFaded p-2 rounded-full'
+            />
+          }
           title='Location'
           value='Alamo, CA'
           href='https://maps.google.com?q=Alamo,+CA'
@@ -75,11 +124,9 @@ const ContactCard = ({ icon, title, value, href }) => (
     rel='noopener noreferrer'
     className='w-full max-w-md flex items-center gap-4 p-4 shadow-sm transition-all bg-lightWhite hover:bg-nav group'
   >
-    <div className='p-2 bg-primary/10 rounded-full text-primary text-lg'>
-      {icon}
-    </div>
+    <div className='p-2 rounded-full text-primary text-lg'>{icon}</div>
     <div className='w-full flex flex-col overflow-hidden'>
-      <p className='font-semibold'>{title}</p>
+      <p className='font-semibold text-shadow-md'>{title}</p>
       <p className='text-base group-hover:underline text-shadow-md truncate overflow-hidden whitespace-nowrap max-w-[200px] sm:max-w-[300px]'>
         {value}
       </p>

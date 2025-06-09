@@ -26,7 +26,7 @@ const Gallery = ({ gallery }) => {
             alt={image.alt || `Gallery Image ${index + 1}`}
             width={800}
             height={600}
-            className='object-cover w-full h-full'
+            className='object-cover w-full h-full shadow-lg'
             sizes='(max-width: 640px) 100vw, 50vw'
             loading='lazy'
             placeholder='empty'

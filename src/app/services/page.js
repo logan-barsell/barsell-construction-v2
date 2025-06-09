@@ -50,7 +50,7 @@ const ServicesPage = () => {
                       alt={`${service.name} Service Hero Image`}
                       fill
                       sizes='(max-width: 768px) 100vw, 400px'
-                      className='object-cover rounded-md'
+                      className='object-cover'
                       loading='lazy'
                       placeholder='empty'
                     />

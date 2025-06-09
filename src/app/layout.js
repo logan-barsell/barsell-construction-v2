@@ -1,11 +1,16 @@
-import { Roboto, Alegreya_SC } from 'next/font/google';
 import '../../styles/globals.css';
+
+import { Roboto, Alegreya_SC } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
 
-const roboto = Roboto({ weight: '400', subsets: ['latin'] });
-const alegreyaSC = Alegreya_SC({ weight: '400', subsets: ['latin'] });
+const roboto = Roboto({ weight: '400', subsets: ['latin'], display: 'swap' });
+const alegreyaSC = Alegreya_SC({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export const metadata = {
   title: 'Barsell Construction Inc.',
@@ -16,12 +21,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en'>
       <head>
-        {/* Fonts */}
-        <link
-          href='https://fonts.googleapis.com/css2?family=Alegreya+SC&display=swap'
-          rel='stylesheet'
-        />
-
         {/* Favicons */}
         <link
           rel='icon'
@@ -70,8 +69,6 @@ export default function RootLayout({ children }) {
           name='theme-color'
           content='#ffffff'
         />
-
-        {/* Viewport & Robots */}
         <meta
           name='viewport'
           content='width=device-width, initial-scale=1'
@@ -152,7 +149,11 @@ export default function RootLayout({ children }) {
       <body
         className={`antialiased text-secondary ${roboto.className} ${alegreyaSC.className}`}
       >
-        <div id='fixed-bg'></div>
+        <div
+          id='fixed-bg'
+          role='presentation'
+          aria-hidden='true'
+        ></div>
         <Header />
         <PageTransition>
           <main>{children}</main>

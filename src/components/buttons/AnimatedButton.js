@@ -1,11 +1,12 @@
 'use client';
-import { useState } from 'react';
 import styles from './AnimatedButton.module.css';
 
 const AnimatedButton = ({ text, onClick, color = 'white', className }) => {
   return (
-    <div
-      className={`${styles.button} ${styles[color]} ${className}`} // Conditionally apply white or black variant
+    <button
+      type='button'
+      aria-label={text}
+      className={`${styles.button} ${styles[color]} ${className}`}
       onClick={onClick}
     >
       <div className={`${styles.line} ${styles.line1}`} />
@@ -15,7 +16,7 @@ const AnimatedButton = ({ text, onClick, color = 'white', className }) => {
       <div className={`${styles.line} ${styles.line5}`} />
       <div className={`${styles.line} ${styles.line6}`} />
       <span className={styles.text}>{text}</span>
-    </div>
+    </button>
   );
 };
 

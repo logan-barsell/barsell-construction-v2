@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global styles */
-/* 1. Base styles */
 html,
 body {
   margin: 0;
@@ -16,7 +14,6 @@ body {
   background: none;
 }
 
-/* 2. Container for the background */
 #fixed-bg {
   position: fixed;
   top: 0;
@@ -28,7 +25,6 @@ body {
   z-index: -1;
 }
 
-/* 3. Inner background content */
 #fixed-bg::before {
   content: '';
   position: absolute;
@@ -47,10 +43,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Alegreya SC', serif; /* Serif font for headings */
+  font-family: 'Alegreya SC', serif;
 }
 
-/* Additional styles for layout */
 * {
   margin: 0;
   padding: 0;
@@ -63,37 +58,21 @@ a {
 }
 
 .section-margin-top {
-  margin-top: 100px; /* Default for smaller screens, can be adjusted based on media queries */
+  margin-top: 100px;
 }
 
-/* You can define more specific ones if needed */
 @media (min-width: 640px) {
   .section-margin-top {
     margin-top: 150px;
   }
 }
-
 @media (min-width: 768px) {
   .section-margin-top {
     margin-top: 200px;
   }
 }
-
 @media (min-width: 1024px) {
   .section-margin-top {
     margin-top: 250px;
   }
-}
-
-/* Initial state for animated items */
-.hero-section {
-  opacity: 0;
-  transform: translateY(50px); /* Move the elements down */
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-/* This style will be applied by the scroll animation */
-.hero-section.visible {
-  opacity: 1;
-  transform: translateY(0); /* Move the elements to their normal position */
 }

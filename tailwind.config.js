@@ -21,9 +21,10 @@ export default {
         secondary: '#000000', // black color
         neutral: '#F8F8F8', // light gray for backgrounds, if needed
         nav: 'rgba(0, 0, 0, 0.7)',
+        lightBlack: 'rgba(0, 0, 0, 0.4)',
         heroWhite: 'rgba(255, 255, 255, 0.7)', // Semi-transparent white for hero section
-        lightWhite: 'rgba(255, 255, 255, 0.2)',
-        heroPrimary: 'rgba(255, 165, 0, 0.7)',
+        lightWhite: 'rgba(255, 255, 255, 0.3)',
+        primaryFaded: 'rgba(255, 165, 0, 0.1)',
       },
       fontFamily: {
         primary: ['Alegreya SC', 'serif'], // For headings
