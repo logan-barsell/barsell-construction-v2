@@ -7,39 +7,29 @@ on:
 
 jobs:
   deploy:
-    name: Build and Deploy via SSH
+    name: Deploy via SSH
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout Code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: ⚙️ Setup SSH Agent
+      - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: 🧠 Add Server to Known Hosts
+      - name: Deploy via SSH
         run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
-
-      - name: 📦 Install Dependencies
-        run: npm install
-
-      - name: 🛠️ Build for Production
-        run: npm run build
-
-      - name: 🚚 Rsync Production Files to Server
-        run: |
-          rsync -avz --delete \
-            .next/ public/ package.json package-lock.json \
-            ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.PROJECT_PATH }}
-
-      - name: 🔁 Restart PM2 on Server
-        run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
             export PATH="/usr/local/node-20/bin:$PATH"
             cd ${{ secrets.PROJECT_PATH }}
-            pm2 restart barsell-construction || pm2 start npm --name barsell-construction -- start
+            echo "🧠 Using correct Node version:"
+            node -v
+            echo "🧠 Latest commit:"
+            git log -1
+            git pull origin main
+            npm install
+            NODE_ENV=production npm run build
+            pm2 restart barsell-construction
           EOF
