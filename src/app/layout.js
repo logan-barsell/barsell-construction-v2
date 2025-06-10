@@ -62,7 +62,8 @@ export default function RootLayout({ children }) {
         <link
           rel='preload'
           as='image'
-          href='/images/bg.jpg'
+          href='/images/bg.webp'
+          type='image/webp'
         />
 
         <meta
