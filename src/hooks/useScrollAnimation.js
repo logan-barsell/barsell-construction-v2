@@ -8,33 +8,47 @@ const useScrollAnimation = (
   useEffect(() => {
     if (!elementsRef.current) return;
 
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          const el = entry.target;
-          if (entry.isIntersecting && el.dataset.animated !== 'true') {
-            el.dataset.animated = 'true';
+    let observer;
 
-            gsap.to(el, {
-              opacity: 1,
-              y: 0,
-              duration: options.duration,
-              ease: 'power3.out',
-              delay: parseFloat(el.dataset.index) * options.delay,
-            });
+    const setupObserver = () => {
+      observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            const el = entry.target;
+            if (entry.isIntersecting && el.dataset.animated !== 'true') {
+              el.dataset.animated = 'true';
 
-            observer.unobserve(el); // Stop watching this element
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+              gsap.to(el, {
+                opacity: 1,
+                y: 0,
+                duration: options.duration,
+                ease: 'power3.out',
+                delay: parseFloat(el.dataset.index) * options.delay,
+              });
 
-    elementsRef.current.forEach(el => {
-      if (el) observer.observe(el);
-    });
+              observer.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
 
-    return () => observer.disconnect();
+      elementsRef.current.forEach(el => {
+        if (el) observer.observe(el);
+      });
+    };
+
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(setupObserver, { timeout: 300 });
+      } else {
+        setTimeout(setupObserver, 300);
+      }
+    }
+
+    return () => {
+      if (observer) observer.disconnect();
+    };
   }, [elementsRef, options]);
 
   return (el, index) => {

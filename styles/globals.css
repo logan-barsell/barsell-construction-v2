@@ -56,3 +56,16 @@ a {
     margin-top: 250px;
   }
 }
+
+/* Initial state for animated items */
+Add commentMore actions .hero-section {
+  opacity: 0;
+  transform: translateY(50px); /* Move the elements down */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* This style will be applied by the scroll animation */
+.hero-section.visible {
+  opacity: 1;
+  transform: translateY(0); /* Move the elements to their normal position */
+}
