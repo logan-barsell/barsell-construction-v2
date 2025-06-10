@@ -2,17 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import AnimatedButton from '@/components/buttons/AnimatedButton';
-import dynamic from 'next/dynamic';
-
-const MissionStatements = dynamic(
-  () => import('@/components/MissionStatements'),
-  {
-    ssr: false,
-  }
-);
-const TestimonialsPage = dynamic(() => import('@/components/Testimonials'), {
-  ssr: false,
-});
+import MissionStatements from '@/components/MissionStatements';
+import TestimonialsPage from '@/components/Testimonials';
 
 const HomePage = () => {
   const router = useRouter();
