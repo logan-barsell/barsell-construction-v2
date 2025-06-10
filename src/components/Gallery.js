@@ -31,6 +31,8 @@ const Gallery = ({ gallery }) => {
             loading={index === 0 || index === 1 ? 'eager' : 'lazy'}
             priority={index === 0 || index === 1}
             placeholder='empty'
+            fetchPriority={index === 0 || index === 1 ? 'high' : 'auto'}
+            quality={90}
           />
         </div>
       ))}
