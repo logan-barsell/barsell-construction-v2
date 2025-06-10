@@ -28,7 +28,8 @@ const Gallery = ({ gallery }) => {
             height={600}
             className='object-cover w-full h-full shadow-lg'
             sizes='(max-width: 640px) 100vw, 50vw'
-            loading='lazy'
+            loading={index === 0 || index === 1 ? 'eager' : 'lazy'}
+            priority={index === 0 || index === 1}
             placeholder='empty'
           />
         </div>

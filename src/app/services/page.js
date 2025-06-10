@@ -51,8 +51,9 @@ const ServicesPage = () => {
                       fill
                       sizes='(max-width: 768px) 100vw, 400px'
                       className='object-cover'
-                      loading='lazy'
+                      loading={index === 0 ? 'eager' : 'lazy'}
                       placeholder='empty'
+                      priority={index === 0 ? true : false}
                     />
                   </div>
                 </div>

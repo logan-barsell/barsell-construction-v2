@@ -21,6 +21,7 @@ const Logo = ({ menuOpen, isMobile }) => {
               ? 'opacity-0 scale-0 h-0'
               : 'h-0 opacity-0 scale-0 xs:h-auto xs:opacity-100 xs:scale-100'
           } sm:block`} // Logo shrinks and fades out on mobile when menu is closed
+          priority={!isMobile}
         />
         <h1 className='xs:text-xl xs:pb-0 pt-0  pb-0.5 text-lg leading-normal lg:hidden text-center sm:px-4 px-0'>
           Barsell Construction Inc.

@@ -5,7 +5,7 @@ export const services = [
       'Transform your existing space with expert design and construction.',
     icon: '/images/icons/remodel-icon.png',
     link: '/services/remodels',
-    image: '/images/services/remodels.jpg',
+    image: '/images/services/remodels.webp',
   },
   {
     name: 'Additions',
@@ -13,7 +13,7 @@ export const services = [
       'Expand your home with additional space to meet your growing needs.',
     icon: '/images/icons/addition-icon.png',
     link: '/services/additions',
-    image: '/images/services/additions.jpg',
+    image: '/images/services/additions.webp',
   },
   {
     name: 'Kitchens',
@@ -21,7 +21,7 @@ export const services = [
       'Create a beautiful and functional kitchen that suits your style.',
     icon: '/images/icons/kitchen-icon.png',
     link: '/services/kitchens',
-    image: '/images/services/kitchens.jpg',
+    image: '/images/services/kitchens.webp',
   },
   {
     name: 'Bathrooms',
@@ -29,7 +29,7 @@ export const services = [
       'Design and build the bathroom of your dreams with expert precision.',
     icon: '/images/icons/bathroom-icon.png',
     link: '/services/bathrooms',
-    image: '/images/services/bathrooms.jpg',
+    image: '/images/services/bathrooms.webp',
   },
   {
     name: 'Doors & Windows',
@@ -37,7 +37,7 @@ export const services = [
       'Install energy-efficient doors and windows that enhance your home.',
     icon: '/images/icons/door-window-icon.png',
     link: '/services/doors-windows',
-    image: '/images/services/doors-windows.jpg',
+    image: '/images/services/doors-windows.webp',
   },
   {
     name: 'Cabanas',
@@ -45,14 +45,14 @@ export const services = [
       'Build custom cabanas for your outdoor space, perfect for relaxation.',
     icon: '/images/icons/cabana-icon.png',
     link: '/services/cabanas',
-    image: '/images/services/cabanas.jpg',
+    image: '/images/services/cabanas.webp',
   },
   {
     name: 'Decks',
     description: 'Create a stunning outdoor living space with a custom deck.',
     icon: '/images/icons/deck-icon.png',
     link: '/services/decks',
-    image: '/images/services/decks.jpg',
+    image: '/images/services/decks.webp',
   },
   {
     name: 'Repairs',
@@ -60,6 +60,6 @@ export const services = [
       'Get reliable, high-quality repairs for all areas of your home.',
     icon: '/images/icons/repair-icon.png',
     link: '/services/repairs',
-    image: '/images/services/repairs.jpg',
+    image: '/images/services/repairs.webp',
   },
 ];
