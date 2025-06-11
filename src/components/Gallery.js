@@ -32,12 +32,13 @@ const Gallery = ({ gallery }) => {
               width={800}
               height={600}
               className='w-full h-auto shadow-lg'
-              sizes={isPriority ? '800px' : '(max-width: 640px) 100vw, 50vw'}
+              sizes='(max-width: 640px) 100vw, 50vw'
               loading={isPriority ? 'eager' : 'lazy'}
               priority={isPriority}
               fetchPriority={isPriority ? 'high' : 'auto'}
               placeholder='empty'
-              quality={90}
+              decoding='sync'
+              quality={75}
             />
           </div>
         );
