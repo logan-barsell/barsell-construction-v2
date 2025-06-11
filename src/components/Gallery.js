@@ -22,8 +22,8 @@ const Gallery = ({ gallery }) => {
           <div
             key={index}
             ref={index > 1 ? el => registerImageRef(el, index) : null}
-            className={`relative overflow-hidden ${
-              isPriority ? 'opacity-100' : 'opacity-0'
+            className={`${
+              isPriority ? 'opacity-100' : 'opacity-0 overflow-hidden relative'
             }`}
           >
             <Image
@@ -31,13 +31,12 @@ const Gallery = ({ gallery }) => {
               alt={image.alt || `Gallery Image ${index + 1}`}
               width={800}
               height={600}
-              className='w-full h-auto shadow-lg'
+              className='w-full h-auto'
               sizes='(max-width: 640px) 100vw, 50vw'
               loading={isPriority ? 'eager' : 'lazy'}
               priority={isPriority}
               fetchPriority={isPriority ? 'high' : 'auto'}
               placeholder='empty'
-              decoding='sync'
               quality={75}
             />
           </div>
