@@ -1,12 +1,7 @@
 'use client';
 import { useState } from 'react';
+import Gallery from '@/components/Gallery';
 import { happyValley, remington } from '@/data/gallery';
-import dynamic from 'next/dynamic';
-
-const Gallery = dynamic(() => import('@/components/Gallery'), {
-  ssr: false,
-  loading: () => <div className='h-64' />,
-});
 
 const GalleryPage = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -62,6 +57,7 @@ const GalleryPage = () => {
           role='tabpanel'
           id={`tabpanel-${activeTab}`}
           aria-labelledby={`tab-${activeTab}`}
+          style={{ contentVisibility: 'auto' }}
         >
           <Gallery gallery={galleries[activeTab].data} />
         </section>

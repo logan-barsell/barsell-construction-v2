@@ -66,13 +66,6 @@ export default function RootLayout({ children }) {
           type='image/webp'
         />
 
-        <link
-          rel='preload'
-          as='image'
-          href='/images/gallery/remington/remington1.webp'
-          type='image/webp'
-        />
-
         <meta
           name='theme-color'
           content='#ffffff'

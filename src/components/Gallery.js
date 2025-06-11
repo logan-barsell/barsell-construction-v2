@@ -15,27 +15,33 @@ const Gallery = ({ gallery }) => {
       key={gallery.length + gallery[0]}
       className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8'
     >
-      {gallery.map((image, index) => (
-        <div
-          key={index}
-          ref={el => registerImageRef(el, index)}
-          className='relative overflow-hidden opacity-0'
-        >
-          <Image
-            src={image.src}
-            alt={image.alt || `Gallery Image ${index + 1}`}
-            width={800}
-            height={600}
-            className='object-cover w-full h-full shadow-lg'
-            sizes='(max-width: 640px) 100vw, 50vw'
-            loading={index === 0 || index === 1 ? 'eager' : 'lazy'}
-            priority={index === 0 || index === 1}
-            placeholder='empty'
-            fetchPriority={index === 0 || index === 1 ? 'high' : 'auto'}
-            quality={90}
-          />
-        </div>
-      ))}
+      {gallery.map((image, index) => {
+        const isPriority = index === 0 || index === 1;
+
+        return (
+          <div
+            key={index}
+            ref={index > 1 ? el => registerImageRef(el, index) : null}
+            className={`relative overflow-hidden ${
+              !isPriority ? 'opacity-0' : ''
+            }`}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt || `Gallery Image ${index + 1}`}
+              width={800}
+              height={600}
+              className='object-cover w-full h-full shadow-lg'
+              sizes='(max-width: 640px) 100vw, 50vw'
+              loading={isPriority ? 'eager' : 'lazy'}
+              priority={isPriority}
+              fetchPriority={isPriority ? 'high' : 'auto'}
+              placeholder='empty'
+              quality={90}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };
