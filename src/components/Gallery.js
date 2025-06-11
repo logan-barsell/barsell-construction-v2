@@ -23,7 +23,7 @@ const Gallery = ({ gallery }) => {
             key={index}
             ref={index > 1 ? el => registerImageRef(el, index) : null}
             className={`relative overflow-hidden ${
-              !isPriority ? 'opacity-0' : ''
+              isPriority ? 'opacity-100' : 'opacity-0'
             }`}
           >
             <Image
@@ -31,8 +31,8 @@ const Gallery = ({ gallery }) => {
               alt={image.alt || `Gallery Image ${index + 1}`}
               width={800}
               height={600}
-              className='object-cover w-full h-full shadow-lg'
-              sizes='(max-width: 640px) 100vw, 50vw'
+              className='w-full h-auto shadow-lg'
+              sizes={isPriority ? '800px' : '(max-width: 640px) 100vw, 50vw'}
               loading={isPriority ? 'eager' : 'lazy'}
               priority={isPriority}
               fetchPriority={isPriority ? 'high' : 'auto'}

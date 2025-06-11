@@ -57,7 +57,6 @@ const GalleryPage = () => {
           role='tabpanel'
           id={`tabpanel-${activeTab}`}
           aria-labelledby={`tab-${activeTab}`}
-          style={{ contentVisibility: 'auto' }}
         >
           <Gallery gallery={galleries[activeTab].data} />
         </section>
