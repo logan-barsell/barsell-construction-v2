@@ -58,7 +58,7 @@ a {
 }
 
 /* Initial state for animated items */
-Add commentMore actions .hero-section {
+.hero-section {
   opacity: 0;
   transform: translateY(50px); /* Move the elements down */
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
