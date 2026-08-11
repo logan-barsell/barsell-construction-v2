@@ -13,7 +13,7 @@ const Gallery = ({ gallery }) => {
   return (
     <div
       key={gallery.length + gallery[0]}
-      className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8'
+      className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto'
     >
       {gallery.map((image, index) => {
         const isPriority = index === 0 || index === 1;
@@ -32,7 +32,7 @@ const Gallery = ({ gallery }) => {
               width={800}
               height={600}
               className='w-full h-auto'
-              sizes='(max-width: 640px) 100vw, 50vw'
+              sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 512px'
               loading={isPriority ? 'eager' : 'lazy'}
               priority={isPriority}
               fetchPriority={isPriority ? 'high' : 'auto'}
