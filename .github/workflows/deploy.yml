@@ -1,9 +1,7 @@
 name: Deploy to DigitalOcean
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -11,29 +9,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+      - run: npm ci
+      - run: npm run build
 
-      - name: Build static site
-        run: npm run build
-
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.9.0
+      - uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Upload static files
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
         run: |
+          set -euo pipefail
+
+          if [[ -z "${HOST}" || -z "${USERNAME}" ]]; then
+            echo "HOST or USERNAME secret is missing"
+            exit 1
+          fi
+
+          ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 \
+            "${USERNAME}@${HOST}" \
+            "mkdir -p /var/www/barsellconstruction.com/public"
+
           rsync -az --delete \
             -e "ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10" \
             ./out/ \
-            ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.DEPLOY_PATH }}/
+            "${USERNAME}@${HOST}:/var/www/barsellconstruction.com/public/"
