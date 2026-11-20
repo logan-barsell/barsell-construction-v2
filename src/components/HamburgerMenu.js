@@ -1,9 +1,12 @@
 const HamburgerMenu = ({ toggleMenu, menuOpen }) => {
   return (
     <button
+      type='button'
       className='sm:hidden flex items-center hover:opacity-80 transition-opacity relative z-20'
       onClick={toggleMenu}
       aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+      aria-controls='primary-navigation'
+      aria-expanded={menuOpen}
     >
       <svg
         className={`pt-1 xs:pt-0 pb-1 w-7 h-7 transition-all duration-300 transform ${

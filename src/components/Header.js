@@ -15,7 +15,7 @@ const Header = () => {
     menuOpen: false,
   });
 
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(640);
   const showNav = useHideOnScroll();
 
   const pathname = usePathname();
@@ -87,6 +87,7 @@ const Header = () => {
               {/* Navigation Links */}
               <NavLinks
                 menuOpen={state.menuOpen}
+                isMobile={isMobile}
                 activeLink={state.activeLink}
                 hoveredLink={state.hoveredLink}
                 handleLinkClick={handleLinkClick}
